@@ -1,0 +1,1281 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelGo | Agencia de Viajes</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f5f7fa;
+            color: #263238;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: #0b3954;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #35c2c1;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #35c2c1;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 520px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 50px 20px;
+            background:
+                linear-gradient(rgba(0, 40, 60, 0.65), rgba(0, 40, 60, 0.65)),
+                url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 21px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            background: #35c2c1;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #269b9a;
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           SECCIONES
+        ========================= */
+
+        section {
+            padding: 70px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 35px;
+            color: #0b3954;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #607d8b;
+        }
+
+        /* =========================
+           DESTINOS
+        ========================= */
+
+        .destinations {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.10);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 22px;
+        }
+
+        .card-content h3 {
+            color: #0b3954;
+            margin-bottom: 10px;
+            font-size: 23px;
+        }
+
+        .card-content p {
+            color: #607d8b;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 21px;
+            font-weight: bold;
+            color: #269b9a;
+            margin-bottom: 15px;
+        }
+
+        /* =========================
+           OPCIONES EXTRA
+        ========================= */
+
+        #moreDestinations {
+            display: none;
+        }
+
+        .more-button {
+            text-align: center;
+            margin-top: 35px;
+        }
+
+        /* =========================
+           RESERVACIÓN
+        ========================= */
+
+        .reservation {
+            background: #e9f7f7;
+        }
+
+        .reservation-box {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #0b3954;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 13px;
+            border: 1px solid #ccd5d9;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #35c2c1;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        .reservation-result {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f0fbfb;
+            border-left: 5px solid #35c2c1;
+            display: none;
+            border-radius: 8px;
+        }
+
+        .reservation-result h3 {
+            color: #0b3954;
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+           PROMOCIONES
+        ========================= */
+
+        .promotions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .promo {
+            background: #0b3954;
+            color: white;
+            padding: 30px;
+            border-radius: 14px;
+            text-align: center;
+        }
+
+        .promo h3 {
+            color: #35c2c1;
+            margin-bottom: 12px;
+        }
+
+        .promo p {
+            line-height: 1.6;
+        }
+
+        /* =========================
+           NOSOTROS
+        ========================= */
+
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about img {
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        .about-text h2 {
+            color: #0b3954;
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            line-height: 1.8;
+            color: #607d8b;
+            margin-bottom: 15px;
+        }
+
+        /* =========================
+           CONTACTO
+        ========================= */
+
+        .contact {
+            background: #0b3954;
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .contact p {
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #062536;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .destinations,
+            .promotions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 0 8px;
+                font-size: 14px;
+            }
+
+            .destinations,
+            .promotions,
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            section {
+                padding: 50px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header>
+
+        <div class="logo">
+            Travel<span>Go</span>
+        </div>
+
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#destinos">Destinos</a>
+            <a href="#reservar">Reservar</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+
+    </header>
+
+
+    <!-- =========================
+         INICIO
+    ========================== -->
+
+    <section class="hero" id="inicio">
+
+        <div class="hero-content">
+
+            <h1>Tu próximo viaje comienza aquí</h1>
+
+            <p>
+                Descubre nuevos destinos, vive experiencias increíbles
+                y reserva tu viaje de forma fácil y rápida.
+            </p>
+
+            <a href="#destinos" class="btn">
+                Explorar destinos
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         DESTINOS
+    ========================== -->
+
+    <section id="destinos">
+
+        <div class="section-title">
+
+            <h2>Destinos populares</h2>
+
+            <p>
+                Encuentra el destino perfecto para tus próximas vacaciones.
+            </p>
+
+        </div>
+
+
+        <div class="destinations">
+
+            <!-- DESTINO 1 -->
+
+            <div class="card">
+
+                <img src="https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?auto=format&fit=crop&w=800&q=80">
+
+                <div class="card-content">
+
+                    <h3>Cancún</h3>
+
+                    <p>
+                        Playas, hoteles y experiencias inolvidables
+                        en el Caribe mexicano.
+                    </p>
+
+                    <div class="price">
+                        Desde $6,500 MXN
+                    </div>
+
+                    <button class="btn"
+                        onclick="seleccionarDestino('Cancún', 6500)">
+                        Reservar
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- DESTINO 2 -->
+
+            <div class="card">
+
+                <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80">
+
+                <div class="card-content">
+
+                    <h3>Bali</h3>
+
+                    <p>
+                        Naturaleza, playas y cultura en uno de
+                        los destinos más increíbles.
+                    </p>
+
+                    <div class="price">
+                        Desde $18,900 MXN
+                    </div>
+
+                    <button class="btn"
+                        onclick="seleccionarDestino('Bali', 18900)">
+                        Reservar
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- DESTINO 3 -->
+
+            <div class="card">
+
+                <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80">
+
+                <div class="card-content">
+
+                    <h3>París</h3>
+
+                    <p>
+                        Conoce la Torre Eiffel, museos,
+                        gastronomía y cultura francesa.
+                    </p>
+
+                    <div class="price">
+                        Desde $22,500 MXN
+                    </div>
+
+                    <button class="btn"
+                        onclick="seleccionarDestino('París', 22500)">
+                        Reservar
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MÁS DESTINOS -->
+
+        <div id="moreDestinations">
+
+            <br>
+
+            <div class="destinations">
+
+                <div class="card">
+
+                    <img src="https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=800&q=80">
+
+                    <div class="card-content">
+
+                        <h3>Nueva York</h3>
+
+                        <p>
+                            Una ciudad llena de entretenimiento,
+                            cultura y experiencias.
+                        </p>
+
+                        <div class="price">
+                            Desde $16,800 MXN
+                        </div>
+
+                        <button class="btn"
+                            onclick="seleccionarDestino('Nueva York', 16800)">
+                            Reservar
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80">
+
+                    <div class="card-content">
+
+                        <h3>Italia</h3>
+
+                        <p>
+                            Roma, Venecia y Florencia en
+                            un recorrido inolvidable.
+                        </p>
+
+                        <div class="price">
+                            Desde $24,500 MXN
+                        </div>
+
+                        <button class="btn"
+                            onclick="seleccionarDestino('Italia', 24500)">
+                            Reservar
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80">
+
+                    <div class="card-content">
+
+                        <h3>Japón</h3>
+
+                        <p>
+                            Tecnología, tradición, gastronomía
+                            y paisajes únicos.
+                        </p>
+
+                        <div class="price">
+                            Desde $27,900 MXN
+                        </div>
+
+                        <button class="btn"
+                            onclick="seleccionarDestino('Japón', 27900)">
+                            Reservar
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="more-button">
+
+            <button class="btn" onclick="mostrarDestinos()">
+                Ver más opciones
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         RESERVACIÓN
+    ========================== -->
+
+    <section class="reservation" id="reservar">
+
+        <div class="section-title">
+
+            <h2>Reserva tu viaje</h2>
+
+            <p>
+                Completa los datos y obtén un precio estimado.
+            </p>
+
+        </div>
+
+
+        <div class="reservation-box">
+
+            <form id="reservationForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Nombre completo
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Escribe tu nombre"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Correo electrónico
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="ejemplo@correo.com"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="destination">
+                            Destino
+                        </label>
+
+                        <select id="destination" required>
+
+                            <option value="">
+                                Selecciona un destino
+                            </option>
+
+                            <option value="6500">
+                                Cancún
+                            </option>
+
+                            <option value="18900">
+                                Bali
+                            </option>
+
+                            <option value="22500">
+                                París
+                            </option>
+
+                            <option value="16800">
+                                Nueva York
+                            </option>
+
+                            <option value="24500">
+                                Italia
+                            </option>
+
+                            <option value="27900">
+                                Japón
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="travelers">
+                            Número de viajeros
+                        </label>
+
+                        <input
+                            type="number"
+                            id="travelers"
+                            min="1"
+                            max="20"
+                            value="1"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="departure">
+                            Fecha de salida
+                        </label>
+
+                        <input
+                            type="date"
+                            id="departure"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="return">
+                            Fecha de regreso
+                        </label>
+
+                        <input
+                            type="date"
+                            id="return"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="type">
+                            Tipo de viaje
+                        </label>
+
+                        <select id="type">
+
+                            <option value="1">
+                                Económico
+                            </option>
+
+                            <option value="1.25">
+                                Estándar
+                            </option>
+
+                            <option value="1.6">
+                                Premium
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="payment">
+                            Método de pago
+                        </label>
+
+                        <select id="payment">
+
+                            <option>
+                                Tarjeta de crédito
+                            </option>
+
+                            <option>
+                                Tarjeta de débito
+                            </option>
+
+                            <option>
+                                Transferencia bancaria
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label for="comments">
+                            Comentarios adicionales
+                        </label>
+
+                        <input
+                            type="text"
+                            id="comments"
+                            placeholder="¿Tienes alguna petición especial?">
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <button
+                            type="submit"
+                            class="btn">
+                            Confirmar reserva
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+
+            <!-- RESULTADO -->
+
+            <div
+                id="reservationResult"
+                class="reservation-result">
+
+                <h3>
+                    ¡Reserva registrada!
+                </h3>
+
+                <p id="resultText"></p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PROMOCIONES
+    ========================== -->
+
+    <section>
+
+        <div class="section-title">
+
+            <h2>Promociones</h2>
+
+            <p>
+                Aprovecha nuestras promociones especiales.
+            </p>
+
+        </div>
+
+
+        <div class="promotions">
+
+            <div class="promo">
+
+                <h3>10% de descuento</h3>
+
+                <p>
+                    Reserva con anticipación y obtén
+                    un descuento especial.
+                </p>
+
+            </div>
+
+
+            <div class="promo">
+
+                <h3>Viaja en familia</h3>
+
+                <p>
+                    Paquetes especiales para grupos
+                    y familias.
+                </p>
+
+            </div>
+
+
+            <div class="promo">
+
+                <h3>Meses sin intereses</h3>
+
+                <p>
+                    Consulta las opciones de pago
+                    disponibles para tu viaje.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         NOSOTROS
+    ========================== -->
+
+    <section id="nosotros">
+
+        <div class="about">
+
+            <img
+                src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="about-text">
+
+                <h2>¿Quiénes somos?</h2>
+
+                <p>
+                    En TravelGo ayudamos a nuestros clientes
+                    a planear y reservar viajes de manera
+                    sencilla y segura.
+                </p>
+
+                <p>
+                    Ofrecemos diferentes destinos, opciones
+                    de hospedaje y paquetes para que cada
+                    persona pueda encontrar una experiencia
+                    adecuada a sus necesidades.
+                </p>
+
+                <a href="#reservar" class="btn">
+                    Planea tu viaje
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTACTO
+    ========================== -->
+
+    <section class="contact" id="contacto">
+
+        <h2>¿Necesitas ayuda?</h2>
+
+        <p>
+            Nuestro equipo está listo para ayudarte
+            a planear tu próximo viaje.
+        </p>
+
+        <p>
+            📧 contacto@travelgo.com
+        </p>
+
+        <p>
+            📞 +52 55 1234 5678
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <p>
+            © 2026 TravelGo - Agencia de Viajes
+        </p>
+
+        <p>
+            Todos los derechos reservados.
+        </p>
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        /*
+        ========================================
+        MOSTRAR MÁS DESTINOS
+        ========================================
+        */
+
+        function mostrarDestinos() {
+
+            const moreDestinations =
+                document.getElementById("moreDestinations");
+
+            const button =
+                document.querySelector(".more-button button");
+
+            if (moreDestinations.style.display === "block") {
+
+                moreDestinations.style.display = "none";
+
+                button.textContent = "Ver más opciones";
+
+            } else {
+
+                moreDestinations.style.display = "block";
+
+                button.textContent = "Ver menos opciones";
+
+            }
+
+        }
+
+
+        /*
+        ========================================
+        SELECCIONAR DESTINO
+        ========================================
+        */
+
+        function seleccionarDestino(nombre, precio) {
+
+            const select =
+                document.getElementById("destination");
+
+            const precios = {
+                "Cancún": "6500",
+                "Bali": "18900",
+                "París": "22500",
+                "Nueva York": "16800",
+                "Italia": "24500",
+                "Japón": "27900"
+            };
+
+            select.value = precios[nombre];
+
+            document
+                .getElementById("reservar")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+
+
+        /*
+        ========================================
+        RESERVACIÓN
+        ========================================
+        */
+
+        document
+            .getElementById("reservationForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+
+                const name =
+                    document.getElementById("name").value;
+
+                const email =
+                    document.getElementById("email").value;
+
+                const destinationSelect =
+                    document.getElementById("destination");
+
+                const destination =
+                    destinationSelect.options[
+                        destinationSelect.selectedIndex
+                    ].text;
+
+
+                const basePrice =
+                    parseFloat(destinationSelect.value);
+
+
+                const travelers =
+                    parseInt(
+                        document.getElementById("travelers").value
+                    );
+
+
+                const type =
+                    parseFloat(
+                        document.getElementById("type").value
+                    );
+
+
+                const departure =
+                    document.getElementById("departure").value;
+
+                const returnDate =
+                    document.getElementById("return").value;
+
+
+                /*
+                Precio total
+                */
+
+                const total =
+                    basePrice *
+                    travelers *
+                    type;
+
+
+                /*
+                Formato de moneda
+                */
+
+                const formattedTotal =
+                    total.toLocaleString(
+                        "es-MX",
+                        {
+                            style: "currency",
+                            currency: "MXN"
+                        }
+                    );
+
+
+                /*
+                Mostrar resultado
+                */
+
+                const result =
+                    document.getElementById(
+                        "reservationResult"
+                    );
+
+                const resultText =
+                    document.getElementById(
+                        "resultText"
+                    );
+
+
+                resultText.innerHTML =
+
+                    "Gracias <strong>" +
+                    name +
+                    "</strong>. " +
+
+                    "Tu solicitud para viajar a " +
+                    "<strong>" +
+                    destination +
+                    "</strong> " +
+
+                    "ha sido registrada.<br><br>" +
+
+                    "📅 Salida: " +
+                    departure +
+                    "<br>" +
+
+                    "📅 Regreso: " +
+                    returnDate +
+                    "<br>" +
+
+                    "👥 Viajeros: " +
+                    travelers +
+                    "<br>" +
+
+                    "📧 Correo: " +
+                    email +
+                    "<br><br>" +
+
+                    "<strong>Precio estimado: " +
+                    formattedTotal +
+                    "</strong><br><br>" +
+
+                    "Un asesor se pondrá en contacto contigo para confirmar la reserva.";
+
+
+                result.style.display = "block";
+
+
+                /*
+                Mover hacia el resultado
+                */
+
+                result.scrollIntoView({
+                    behavior: "smooth"
+                });
+
+            });
+
+
+        /*
+        ========================================
+        VALIDACIÓN DE FECHAS
+        ========================================
+        */
+
+        const today =
+            new Date().toISOString().split("T")[0];
+
+        document
+            .getElementById("departure")
+            .setAttribute("min", today);
+
+        document
+            .getElementById("return")
+            .setAttribute("min", today);
+
+
+        document
+            .getElementById("departure")
+            .addEventListener("change", function() {
+
+                document
+                    .getElementById("return")
+                    .setAttribute(
+                        "min",
+                        this.value
+                    );
+
+            });
+
+    </script>
+
+</body>
+</html>
+```
